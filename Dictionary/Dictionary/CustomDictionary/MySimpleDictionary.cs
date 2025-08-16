@@ -68,7 +68,7 @@ namespace Dictionary.CustomDictionary
         }
         public MySimpleDictionary(IDictionary<TKey, TValue> dictionary)
         {
-            buckets = new List<Entry>[DefaultCapacity];
+            buckets = new List<Entry>[HashHelper.GetPrime(dictionary.Count)];
             foreach (var kvp in dictionary)
             {
                 Add(kvp.Key, kvp.Value);

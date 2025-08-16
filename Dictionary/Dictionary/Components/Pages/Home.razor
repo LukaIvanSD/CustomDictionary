@@ -67,12 +67,26 @@
         Console.WriteLine(dictionary.ContainsValue("testic"));
         Console.WriteLine(dictionary.TryGetValue("Treci element"));
         Console.WriteLine(dictionary["Sesti element"]);
-        dictionary["Sesti element"] = "gaaas";
+        dictionary["Sesti element"] = "izmenjena vrednost";
         Console.WriteLine(dictionary["Sesti element"]);
         dictionary["Nepostojeci"] = "sad postoji";
         dictionary["Nepostojeci1"] = "sad postoji";
         dictionary["Nepostojeci2"] = "sad postoji";
         dictionary["Nepostojeci3"] = "sad postoji";
+        Console.WriteLine("Kljucevi u dictionary:");
+        string keys = "";
+        foreach (string key in dictionary.Keys)
+        {
+            keys += key +" | ";
+        }
+        Console.WriteLine(keys);
+        Console.WriteLine("Vrednosti u dictionary:");
+        string values = "";
+        foreach (string value in dictionary.Values)
+        {
+            values += value +" | ";
+        }
+        Console.WriteLine(values);
 
     }
 
