@@ -13,7 +13,7 @@ namespace Dictionary.CustomDictionary
 
         private string[] keys;
         private string[] values;
-        private Random random;
+        private Random random= new Random();
 
 
         [GlobalSetup]
