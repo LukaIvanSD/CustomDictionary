@@ -148,7 +148,7 @@ namespace Dictionary.CustomDictionary
                         uint newBucketIndex = GetBucket(hashCode);
                         if (buckets[newBucketIndex] == null)
                         {
-                            buckets[newBucketIndex] = new List<Entry>();
+                            buckets[newBucketIndex] = new List<Entry>(1);
                         }
                         buckets[newBucketIndex].Add(entry);
                     }
