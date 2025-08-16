@@ -1,0 +1,104 @@
+﻿@page "/"
+@using BenchmarkDotNet.Running
+@rendermode InteractiveServer
+<MudThemeProvider />
+<MudPopoverProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<PageTitle>Home</PageTitle>
+
+<MudPaper Class="pa-4" Style="max-width:600px;">
+
+    <MudTextField @bind-Value="Key" Label="Key" Variant="Variant.Outlined" Class="mb-2"/>
+    <MudTextField @bind-Value="Value" Label="Value" Variant="Variant.Outlined" Class="mb-2"/>
+
+    <MudButton Color="Color.Primary" Variant="Variant.Filled" OnClick="AddItem" Class="mb-4">
+        Add
+    </MudButton>
+
+    <MudButton Color="Color.Error" Variant="Variant.Filled" OnClick="ClearDictionary" Class="mb-4">
+        Clear Dictionary
+    </MudButton>
+
+    <MudDataGrid Items="dictionary" Hover="true" Striped="true" Bordered="true">
+        <Columns>
+            <PropertyColumn Property="@(p=>p.Key)"></PropertyColumn>
+            <PropertyColumn Property="@(p=>p.Value)"></PropertyColumn>
+            <TemplateColumn>
+                <CellTemplate>
+                    <MudIconButton Icon="@Icons.Material.Filled.Delete" 
+                                   OnClick="@(() => RemoveItem(context.Item))" 
+                                   Color="Color.Error" 
+                                   Size="Size.Small" />
+                </CellTemplate>
+            </TemplateColumn>
+        </Columns>
+    </MudDataGrid>
+    <MudButton Color="Color.Dark" Variant="Variant.Filled" OnClick="StartBenchmark" Class="mb-4">
+        Start benchmark
+    </MudButton>
+
+</MudPaper>
+
+@code {
+    private string Key { get; set; }
+    private string Value { get; set; }
+
+    private MySimpleDictionary<string, string> dictionary = new MySimpleDictionary<string, string>()
+    {
+        {"Dodat preko konstrukora","dodat" },
+        {"Dodat preko konstuktora 2","ponovo dodat"}
+    };
+    protected override void OnInitialized()
+    {
+        dictionary.Add("test", "testic");
+        dictionary.Add("test2", "testic2");
+        dictionary.Add("Treci element", "treci");
+        dictionary.Add("Cetvrti element", "cetvrti");
+        dictionary.Add("Peti element", "peti");
+        dictionary.Add("Sesti element", "sesti");
+        dictionary.Add("Treci element", "trecia");
+        dictionary.Remove("test");
+        Console.WriteLine(dictionary.Count);
+        Console.WriteLine(dictionary.ContainsKey("Peti element"));
+        Console.WriteLine(dictionary.ContainsKey("Neki element"));
+        Console.WriteLine(dictionary.ContainsValue("testic2"));
+        Console.WriteLine(dictionary.ContainsValue("testic"));
+        Console.WriteLine(dictionary.TryGetValue("Treci element"));
+        Console.WriteLine(dictionary["Sesti element"]);
+        dictionary["Sesti element"] = "gaaas";
+        Console.WriteLine(dictionary["Sesti element"]);
+        dictionary["Nepostojeci"] = "sad postoji";
+        dictionary["Nepostojeci1"] = "sad postoji";
+        dictionary["Nepostojeci2"] = "sad postoji";
+        dictionary["Nepostojeci3"] = "sad postoji";
+
+    }
+
+    private void AddItem()
+    {
+        if (!string.IsNullOrWhiteSpace(Key) && !string.IsNullOrWhiteSpace(Value))
+        {
+            dictionary.Add(Key, Value); 
+        }
+    }
+
+    private void RemoveItem(KeyValuePair<string,string> item)
+    {
+        dictionary.Remove(item.Key);
+        StateHasChanged();
+    }
+
+    private void ClearDictionary()
+    {
+        dictionary.Clear();
+        StateHasChanged();
+    }
+
+    private void StartBenchmark()
+    {
+        var summary = BenchmarkRunner.Run<DictionaryBenchmarks>();
+
+    }
+}

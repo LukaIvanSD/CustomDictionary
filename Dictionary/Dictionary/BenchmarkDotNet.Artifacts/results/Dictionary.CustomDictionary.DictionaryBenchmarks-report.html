@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>Dictionary.CustomDictionary.DictionaryBenchmarks-20250816-154120</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet v0.15.2, Windows 11 (10.0.26100.4946/24H2/2024Update/HudsonValley)
+11th Gen Intel Core i7-11800H 2.30GHz, 1 CPU, 16 logical and 8 physical cores
+.NET SDK 9.0.302
+  [Host]     : .NET 8.0.18 (8.0.1825.31117), X64 RyuJIT AVX-512F+CD+BW+DQ+VL+VBMI [AttachedDebugger]
+  DefaultJob : .NET 8.0.18 (8.0.1825.31117), X64 RyuJIT AVX-512F+CD+BW+DQ+VL+VBMI
+</code></pre>
+<pre><code></code></pre>
+
+<table>
+<thead><tr><th>Method           </th><th>Mean  </th><th>Error</th><th>StdDev</th><th>Gen0</th><th>Gen1</th><th>Gen2</th><th>Allocated</th>
+</tr>
+</thead><tbody><tr><td>MyDictionary_Add</td><td>32,501.44 &mu;s</td><td>625.400 &mu;s</td><td>813.196 &mu;s</td><td>125.0000</td><td>62.5000</td><td>62.5000</td><td>17812181 B</td>
+</tr><tr><td>DotNetDictionary_Add</td><td>6,241.71 &mu;s</td><td>124.316 &mu;s</td><td>204.254 &mu;s</td><td>117.1875</td><td>117.1875</td><td>117.1875</td><td>8452440 B</td>
+</tr><tr><td>MyDictionary_Lookup</td><td>967.01 &mu;s</td><td>17.792 &mu;s</td><td>16.643 &mu;s</td><td>-</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>DotNetDictionary_Lookup</td><td>243.45 &mu;s</td><td>4.687 &mu;s</td><td>4.384 &mu;s</td><td>-</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>MyDictionary_Remove</td><td>869.28 &mu;s</td><td>9.196 &mu;s</td><td>7.679 &mu;s</td><td>-</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>DotNetDictionary_Remove</td><td>71.51 &mu;s</td><td>0.821 &mu;s</td><td>0.686 &mu;s</td><td>-</td><td>-</td><td>-</td><td>-</td>
+</tr></tbody></table>
+</body>
+</html>
