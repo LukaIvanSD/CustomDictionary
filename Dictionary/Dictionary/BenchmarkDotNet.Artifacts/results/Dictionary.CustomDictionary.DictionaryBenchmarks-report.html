@@ -2,7 +2,7 @@
 <html lang='en'>
 <head>
 <meta charset='utf-8' />
-<title>Dictionary.CustomDictionary.DictionaryBenchmarks-20250816-165432</title>
+<title>Dictionary.CustomDictionary.DictionaryBenchmarks-20250816-173920</title>
 
 <style type="text/css">
 	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
@@ -18,18 +18,37 @@ BenchmarkDotNet v0.15.2, Windows 11 (10.0.26100.4946/24H2/2024Update/HudsonValle
 .NET SDK 9.0.302
   [Host]     : .NET 8.0.18 (8.0.1825.31117), X64 RyuJIT AVX-512F+CD+BW+DQ+VL+VBMI [AttachedDebugger]
   DefaultJob : .NET 8.0.18 (8.0.1825.31117), X64 RyuJIT AVX-512F+CD+BW+DQ+VL+VBMI
+  Job-CNUJVU : .NET 8.0.18 (8.0.1825.31117), X64 RyuJIT AVX-512F+CD+BW+DQ+VL+VBMI
 </code></pre>
 <pre><code></code></pre>
 
 <table>
-<thead><tr><th>Method           </th><th>Mean  </th><th>Error </th><th>StdDev</th><th>Gen0</th><th>Gen1</th><th>Gen2</th><th>Allocated</th>
+<thead><tr><th>Method           </th><th>Job </th><th>InvocationCount</th><th>UnrollFactor</th><th>N</th><th>Mean   </th><th>Error  </th><th>StdDev </th><th>Median </th><th>Gen0</th><th>Gen1</th><th>Gen2</th><th>Allocated</th>
 </tr>
-</thead><tbody><tr><td>MyDictionary_Add</td><td>30,790.08 &mu;s</td><td>1,049.058 &mu;s</td><td>3,076.706 &mu;s</td><td>62.5000</td><td>31.2500</td><td>31.2500</td><td>16298002 B</td>
-</tr><tr><td>DotNetDictionary_Add</td><td>6,533.25 &mu;s</td><td>128.871 &mu;s</td><td>196.799 &mu;s</td><td>148.4375</td><td>148.4375</td><td>109.3750</td><td>8452412 B</td>
-</tr><tr><td>MyDictionary_Lookup</td><td>986.74 &mu;s</td><td>19.418 &mu;s</td><td>20.777 &mu;s</td><td>-</td><td>-</td><td>-</td><td>-</td>
-</tr><tr><td>DotNetDictionary_Lookup</td><td>248.56 &mu;s</td><td>4.944 &mu;s</td><td>5.077 &mu;s</td><td>-</td><td>-</td><td>-</td><td>-</td>
-</tr><tr><td>MyDictionary_Remove</td><td>1,074.89 &mu;s</td><td>35.656 &mu;s</td><td>104.011 &mu;s</td><td>-</td><td>-</td><td>-</td><td>-</td>
-</tr><tr><td>DotNetDictionary_Remove</td><td>76.07 &mu;s</td><td>1.500 &mu;s</td><td>2.705 &mu;s</td><td>-</td><td>-</td><td>-</td><td>-</td>
+</thead><tbody><tr><td>MyDictionary_Add</td><td>DefaultJob</td><td>Default</td><td>16</td><td>1000</td><td>109.01 &mu;s</td><td>1.196 &mu;s</td><td>1.061 &mu;s</td><td>108.80 &mu;s</td><td>0.7324</td><td>0.1221</td><td>-</td><td>180480 B</td>
+</tr><tr><td>DotNetDictionary_Add</td><td>DefaultJob</td><td>Default</td><td>16</td><td>1000</td><td>24.81 &mu;s</td><td>0.207 &mu;s</td><td>0.161 &mu;s</td><td>24.85 &mu;s</td><td>0.3967</td><td>0.0305</td><td>-</td><td>102216 B</td>
+</tr><tr><td>MyDictionary_Lookup</td><td>Job-CNUJVU</td><td>1</td><td>1</td><td>1000</td><td>88.96 &mu;s</td><td>2.974 &mu;s</td><td>7.886 &mu;s</td><td>88.10 &mu;s</td><td>-</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>DotNetDictionary_Lookup</td><td>Job-CNUJVU</td><td>1</td><td>1</td><td>1000</td><td>33.29 &mu;s</td><td>1.993 &mu;s</td><td>5.845 &mu;s</td><td>32.60 &mu;s</td><td>-</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>MyDictionary_Remove</td><td>Job-CNUJVU</td><td>1</td><td>1</td><td>1000</td><td>75.99 &mu;s</td><td>3.601 &mu;s</td><td>9.796 &mu;s</td><td>75.70 &mu;s</td><td>-</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>DotNetDictionary_Remove</td><td>Job-CNUJVU</td><td>1</td><td>1</td><td>1000</td><td>34.32 &mu;s</td><td>1.878 &mu;s</td><td>5.477 &mu;s</td><td>33.20 &mu;s</td><td>-</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>MyDictionary_Add</td><td>DefaultJob</td><td>Default</td><td>16</td><td>10000</td><td>1,784.66 &mu;s</td><td>34.442 &mu;s</td><td>47.144 &mu;s</td><td>1,783.13 &mu;s</td><td>9.7656</td><td>7.8125</td><td>3.9063</td><td>1734755 B</td>
+</tr><tr><td>DotNetDictionary_Add</td><td>DefaultJob</td><td>Default</td><td>16</td><td>10000</td><td>640.79 &mu;s</td><td>12.709 &mu;s</td><td>12.482 &mu;s</td><td>645.18 &mu;s</td><td>21.4844</td><td>21.4844</td><td>21.4844</td><td>942033 B</td>
+</tr><tr><td>MyDictionary_Lookup</td><td>Job-CNUJVU</td><td>1</td><td>1</td><td>10000</td><td>522.44 &mu;s</td><td>70.281 &mu;s</td><td>207.227 &mu;s</td><td>385.85 &mu;s</td><td>-</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>DotNetDictionary_Lookup</td><td>Job-CNUJVU</td><td>1</td><td>1</td><td>10000</td><td>228.60 &mu;s</td><td>20.431 &mu;s</td><td>59.598 &mu;s</td><td>210.45 &mu;s</td><td>-</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>MyDictionary_Remove</td><td>Job-CNUJVU</td><td>1</td><td>1</td><td>10000</td><td>315.66 &mu;s</td><td>18.607 &mu;s</td><td>53.386 &mu;s</td><td>292.80 &mu;s</td><td>-</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>DotNetDictionary_Remove</td><td>Job-CNUJVU</td><td>1</td><td>1</td><td>10000</td><td>246.16 &mu;s</td><td>20.068 &mu;s</td><td>58.220 &mu;s</td><td>234.00 &mu;s</td><td>-</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>MyDictionary_Add</td><td>DefaultJob</td><td>Default</td><td>16</td><td>100000</td><td>24,891.15 &mu;s</td><td>1,070.216 &mu;s</td><td>3,138.760 &mu;s</td><td>26,357.65 &mu;s</td><td>62.5000</td><td>31.2500</td><td>31.2500</td><td>16296962 B</td>
+</tr><tr><td>DotNetDictionary_Add</td><td>DefaultJob</td><td>Default</td><td>16</td><td>100000</td><td>6,199.64 &mu;s</td><td>96.762 &mu;s</td><td>85.777 &mu;s</td><td>6,221.32 &mu;s</td><td>117.1875</td><td>117.1875</td><td>117.1875</td><td>8452438 B</td>
+</tr><tr><td>MyDictionary_Lookup</td><td>Job-CNUJVU</td><td>1</td><td>1</td><td>100000</td><td>5,841.46 &mu;s</td><td>233.229 &mu;s</td><td>638.461 &mu;s</td><td>5,729.20 &mu;s</td><td>-</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>DotNetDictionary_Lookup</td><td>Job-CNUJVU</td><td>1</td><td>1</td><td>100000</td><td>2,570.04 &mu;s</td><td>124.736 &mu;s</td><td>357.892 &mu;s</td><td>2,462.50 &mu;s</td><td>-</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>MyDictionary_Remove</td><td>Job-CNUJVU</td><td>1</td><td>1</td><td>100000</td><td>4,689.55 &mu;s</td><td>185.909 &mu;s</td><td>518.239 &mu;s</td><td>4,534.60 &mu;s</td><td>-</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>DotNetDictionary_Remove</td><td>Job-CNUJVU</td><td>1</td><td>1</td><td>100000</td><td>2,682.71 &mu;s</td><td>118.523 &mu;s</td><td>338.152 &mu;s</td><td>2,569.45 &mu;s</td><td>-</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>MyDictionary_Add</td><td>DefaultJob</td><td>Default</td><td>16</td><td>1000000</td><td>734,579.44 &mu;s</td><td>12,298.336 &mu;s</td><td>10,902.154 &mu;s</td><td>733,660.10 &mu;s</td><td>-</td><td>-</td><td>-</td><td>244236464 B</td>
+</tr><tr><td>DotNetDictionary_Add</td><td>DefaultJob</td><td>Default</td><td>16</td><td>1000000</td><td>75,177.90 &mu;s</td><td>1,458.631 &mu;s</td><td>2,183.210 &mu;s</td><td>74,590.19 &mu;s</td><td>142.8571</td><td>142.8571</td><td>142.8571</td><td>75443614 B</td>
+</tr><tr><td>MyDictionary_Lookup</td><td>Job-CNUJVU</td><td>1</td><td>1</td><td>1000000</td><td>166,177.21 &mu;s</td><td>2,285.205 &mu;s</td><td>2,025.775 &mu;s</td><td>165,793.65 &mu;s</td><td>-</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>DotNetDictionary_Lookup</td><td>Job-CNUJVU</td><td>1</td><td>1</td><td>1000000</td><td>60,713.60 &mu;s</td><td>1,853.337 &mu;s</td><td>5,317.572 &mu;s</td><td>60,622.50 &mu;s</td><td>-</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>MyDictionary_Remove</td><td>Job-CNUJVU</td><td>1</td><td>1</td><td>1000000</td><td>159,670.05 &mu;s</td><td>3,766.844 &mu;s</td><td>10,928.298 &mu;s</td><td>156,082.10 &mu;s</td><td>-</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>DotNetDictionary_Remove</td><td>Job-CNUJVU</td><td>1</td><td>1</td><td>1000000</td><td>54,585.39 &mu;s</td><td>1,085.359 &mu;s</td><td>2,265.549 &mu;s</td><td>54,124.75 &mu;s</td><td>-</td><td>-</td><td>-</td><td>-</td>
 </tr></tbody></table>
 </body>
 </html>

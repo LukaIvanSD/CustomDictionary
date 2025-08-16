@@ -9,8 +9,8 @@ namespace Dictionary.CustomDictionary
     {
         private MySimpleDictionary<string, string> myDictionary;
         private Dictionary<string, string> dotnetDictionary;
-        private const int N = 100000;
-
+        [Params(1000, 10000, 100000,1000000)]
+        public int N;
         private string[] keys;
         private string[] values;
         private Random random= new Random();
@@ -45,49 +45,99 @@ namespace Dictionary.CustomDictionary
             }
             return new string(chars);
         }
-
         [Benchmark]
         public void MyDictionary_Add()
         {
             myDictionary = new MySimpleDictionary<string, string>();
             for (int i = 0; i < N; i++)
+            {
                 myDictionary.Add(keys[i], keys[i]);
+            }
         }
 
         [Benchmark]
         public void DotNetDictionary_Add()
         {
-            dotnetDictionary = new Dictionary<string,string>();
+            dotnetDictionary = new Dictionary<string, string>();
             for (int i = 0; i < N; i++)
+            {
                 dotnetDictionary.Add(keys[i], keys[i]);
+            }
         }
+        [IterationSetup(Target = nameof(MyDictionary_Lookup))]
+        public void SetupMyDictionaryForLookup()
+        {
+            myDictionary = new MySimpleDictionary<string, string>();
+            for (int i = 0; i < N; i++)
+            {
+                myDictionary.Add(keys[i], values[i]);
+            }
+        }
+
+        [IterationSetup(Target = nameof(DotNetDictionary_Lookup))]
+        public void SetupDotNetDictionaryForLookup()
+        {
+            dotnetDictionary = new Dictionary<string, string>();
+            for (int i = 0; i < N; i++)
+            {
+                dotnetDictionary.Add(keys[i], values[i]);
+            }
+        }
+
         [Benchmark]
         public void MyDictionary_Lookup()
         {
             for (int i = 0; i < N; i++)
-                _ = myDictionary.TryGetValue(keys[i]);
+            {
+                myDictionary.TryGetValue(keys[i]);
+            }
         }
 
         [Benchmark]
         public void DotNetDictionary_Lookup()
         {
-            string value;
             for (int i = 0; i < N; i++)
-                _ = dotnetDictionary.TryGetValue(keys[i],out value);
+            {
+                dotnetDictionary.TryGetValue(keys[i], out _);
+            }
         }
+        [IterationSetup(Target = nameof(MyDictionary_Remove))]
+        public void SetupMyDictionaryForRemove()
+        {
+            myDictionary = new MySimpleDictionary<string, string>();
+            for (int i = 0; i < N; i++)
+            {
+                myDictionary.Add(keys[i], values[i]);
+            }
+        }
+
+        [IterationSetup(Target = nameof(DotNetDictionary_Remove))]
+        public void SetupDotNetDictionaryForRemove()
+        {
+            dotnetDictionary = new Dictionary<string, string>();
+            for (int i = 0; i < N; i++)
+            {
+                dotnetDictionary.Add(keys[i], values[i]);
+            }
+        }
+
 
         [Benchmark]
         public void MyDictionary_Remove()
         {
             for (int i = 0; i < N; i++)
+            {
                 myDictionary.Remove(keys[i]);
+            }
         }
 
         [Benchmark]
         public void DotNetDictionary_Remove()
         {
             for (int i = 0; i < N; i++)
+            {
                 dotnetDictionary.Remove(keys[i]);
+            }
         }
     }
 }
