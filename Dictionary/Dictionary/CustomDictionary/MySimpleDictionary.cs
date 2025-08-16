@@ -20,7 +20,7 @@ namespace Dictionary.CustomDictionary
         {
             get
             {
-                List<TKey> keys = new List<TKey>();
+                List<TKey> keys = new List<TKey>(Count);
                 foreach (List<Entry> bucket in buckets)
                 {
                     if (bucket != null)
@@ -40,7 +40,7 @@ namespace Dictionary.CustomDictionary
         {
             get
             {
-                List<TValue> values = new List<TValue>();
+                List<TValue> values = new List<TValue>(Count);
                 foreach (List<Entry> bucket in buckets)
                 {
                     if (bucket != null)
